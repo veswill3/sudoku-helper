@@ -149,7 +149,7 @@ class App extends Component {
             {this.renderRow(toHighlight, 8)}
           </tbody>
         </table>
-        <div>
+        <div className="buttons">
           <button onClick={() => this.updateHighlight(0)}>C</button>
           <button onClick={() => this.updateHighlight(1)}>1</button>
           <button onClick={() => this.updateHighlight(2)}>2</button>
