@@ -1,24 +1,26 @@
 import React, { Component } from 'react';
-import './App.css';
+
+// split into rows and columns and convert to number
+const string2board = (str) => str.match(/.{1,9}/g).map(row => row.split('').map(Number));
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
-      board: [
-        [0,0,0,3,0,0,0,0,0],
-        [1,0,0,5,0,0,0,2,0],
-        [0,0,6,0,0,0,7,9,0],
-        [4,0,0,0,0,0,0,7,0],
-        [0,2,7,0,0,0,8,0,0],
-        [5,0,3,0,8,0,0,4,9],
-        [0,0,0,0,7,0,0,0,0],
-        [8,0,0,0,6,0,1,0,0],
-        [0,0,4,0,0,1,0,3,0]
-      ],
+      // board: [
+      //   [0,0,0,3,0,0,0,0,0],
+      //   [1,0,0,5,0,0,0,2,0],
+      //   [0,0,6,0,0,0,7,9,0],
+      //   [4,0,0,0,0,0,0,7,0],
+      //   [0,2,7,0,0,0,8,0,0],
+      //   [5,0,3,0,8,0,0,4,9],
+      //   [0,0,0,0,7,0,0,0,0],
+      //   [8,0,0,0,6,0,1,0,0],
+      //   [0,0,4,0,0,1,0,3,0]
+      // ],
+      board: string2board('000300000100500020006000790400000070027000800503080049000070000800060100004001030'),
       selected: 0,
     };
-    this.keydownHandler = this.keydownHandler.bind(this);
   }
 
   componentDidMount() {
@@ -29,14 +31,15 @@ class App extends Component {
     document.body.removeEventListener('keydown', this.keydownHandler);
   }
 
-  keydownHandler(e) {
+  keydownHandler = (e) => {
     // right arrow or space
     if (e.keyCode === 39 || e.keyCode === 32) {
       this.updateHighlight(++this.state.selected);
+      e.preventDefault();
     } else if (e.keyCode === 37) { // left arrow
       this.updateHighlight(--this.state.selected);
+      e.preventDefault();
     }
-    e.preventDefault();
   }
 
   handleClick(r, c) {
@@ -127,13 +130,13 @@ class App extends Component {
     }
 
     return (
-      <div className="App">
+      <div>
         <h2>Sudoku visual helper</h2>
         <p>
           Visually show remaining possibilities while solving a sudoku puzzle.
           This is not a solver, it just helps to quickly review the board.
         </p>
-        <table className="board">
+        <table>
           <tbody>
             {this.renderRow(toHighlight, 0)}
             {this.renderRow(toHighlight, 1)}
