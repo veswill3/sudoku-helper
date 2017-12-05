@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 
 // split into rows and columns and convert to number
-const string2board = (str) => str.match(/.{1,9}/g).map(row => row.split('').map(Number));
+const string2board = (str) => str
+  .match(/.{1,9}/g)
+  .map(row => row.split('')
+  .map(Number));
 
 class App extends Component {
   constructor() {
@@ -56,7 +59,7 @@ class App extends Component {
       return (
         <td>
           <input
-            type="numberic"
+            type="number"
             maxLength={1}
             size={1}
             value={this.state.board[r][c] ? this.state.board[r][c] : ''}
@@ -189,8 +192,15 @@ class App extends Component {
           <button onClick={() => this.updateHighlight(++this.state.selected)}>+</button>
         </div>
         <p>
-          Click a number below to show it's availible slots. Click any slot to insert that number.
-          Cylce through numbers with the [+] button, spacebar, or left/right arrows.
+          Click a number below to show it's availible slots. Click any slot to
+          insert that number. Cylce through numbers with the [+] button,
+          spacebar, or left/right arrows.
+        </p>
+        <p>
+          I started this on a plane after some frustration with a puzzle. I
+          figured it would be a simple way to toy around with react. If you are
+          interested, you can find the source code
+          on <a href="https://github.com/veswill3/sudoku-helper">github</a>.
         </p>
       </div>
     );
