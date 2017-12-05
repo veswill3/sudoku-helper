@@ -23,7 +23,6 @@ class App extends Component {
       // ],
       board: string2board('000300000100500020006000790400000070027000800503080049000070000800060100004001030'),
       selected: 0,
-      editBoard: false,
     };
   }
 
@@ -55,23 +54,6 @@ class App extends Component {
   }
 
   renderCell(heightlightObj, r, c) {
-    if (this.state.editBoard) {
-      return (
-        <td>
-          <input
-            type="number"
-            max={9}
-            value={this.state.board[r][c] ? this.state.board[r][c] : ''}
-            onChange={e => {
-              const board = [...this.state.board];
-              board[r] = [...this.state.board[r]];
-              board[r][c] = e.target.value;
-              this.setState({ board });
-            }}
-          />
-        </td>
-      );
-    }
     let classes = [];
     if (heightlightObj && heightlightObj[r + ':' + c]) {
       classes.push("highlight");
@@ -156,13 +138,6 @@ class App extends Component {
         <p>
           Visually show remaining possibilities while solving a sudoku puzzle.
           This is not a solver, it just helps to quickly review the board.
-          To toggle the table editor&nbsp;
-          <span
-            className="edit-link"
-            onClick={() => this.setState({ editBoard: !this.state.editBoard })}
-          >
-            Click here
-          </span>
         </p>
         <table>
           <tbody>
