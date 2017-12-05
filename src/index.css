@@ -71,3 +71,13 @@ button {
 .selected {
   color: white;
 }
+
+.edit-link {
+  cursor: pointer;
+  color: blue;
+  text-decoration: underline;
+}
+
+input {
+  width: 15px;
+}
