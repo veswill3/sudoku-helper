@@ -60,8 +60,7 @@ class App extends Component {
         <td>
           <input
             type="number"
-            maxLength={1}
-            size={1}
+            max={9}
             value={this.state.board[r][c] ? this.state.board[r][c] : ''}
             onChange={e => {
               const board = [...this.state.board];
