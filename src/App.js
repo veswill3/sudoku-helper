@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 
 // split into rows and columns and convert to number
-const string2board = (str) => str
-  .match(/.{1,9}/g)
-  .map(row => row.split('')
-  .map(Number));
+const string2board = str =>
+  str.match(/.{1,9}/g).map(row => row.split('').map(Number));
 
 class App extends Component {
   constructor() {
@@ -21,7 +19,9 @@ class App extends Component {
       //   [8,0,0,0,6,0,1,0,0],
       //   [0,0,4,0,0,1,0,3,0]
       // ],
-      board: string2board('000300000100500020006000790400000070027000800503080049000070000800060100004001030'),
+      board: string2board(
+        '000300000100500020006000790400000070027000800503080049000070000800060100004001030'
+      ),
       selected: 0,
     };
   }
@@ -34,37 +34,37 @@ class App extends Component {
     document.body.removeEventListener('keydown', this.keydownHandler);
   }
 
-  keydownHandler = (e) => {
+  keydownHandler = e => {
     // right arrow or space
     if (e.keyCode === 39 || e.keyCode === 32) {
       this.updateHighlight(++this.state.selected);
       e.preventDefault();
-    } else if (e.keyCode === 37) { // left arrow
+    } else if (e.keyCode === 37) {
+      // left arrow
       this.updateHighlight(--this.state.selected);
       e.preventDefault();
     }
-  }
+  };
 
   handleClick(r, c) {
     let newBoard = this.state.board.map(function(row) {
       return row.slice();
     });
     newBoard[r][c] = this.state.selected;
-    this.setState({board: newBoard});
+    this.setState({ board: newBoard });
   }
 
   renderCell(highlightObj, r, c) {
     let classes = [];
     if (highlightObj && highlightObj[r + ':' + c]) {
-      classes.push("highlight");
+      classes.push('highlight');
     }
     if (this.state.selected === this.state.board[r][c]) {
-      classes.push("selected");
+      classes.push('selected');
     }
     return (
-      <td className={classes.join(" ")}
-          onClick={() => this.handleClick(r, c)}>
-        {this.state.board[r][c] ? this.state.board[r][c] : " "}
+      <td className={classes.join(' ')} onClick={() => this.handleClick(r, c)}>
+        {this.state.board[r][c] ? this.state.board[r][c] : ' '}
       </td>
     );
   }
@@ -89,7 +89,7 @@ class App extends Component {
     if (val > 9) {
       val = 0;
     }
-    this.setState({selected: val});
+    this.setState({ selected: val });
   }
 
   render() {
@@ -163,7 +163,9 @@ class App extends Component {
           <button onClick={() => this.updateHighlight(7)}>7</button>
           <button onClick={() => this.updateHighlight(8)}>8</button>
           <button onClick={() => this.updateHighlight(9)}>9</button>
-          <button onClick={() => this.updateHighlight(++this.state.selected)}>+</button>
+          <button onClick={() => this.updateHighlight(++this.state.selected)}>
+            +
+          </button>
         </div>
         <p>
           Click a number below to show it's available slots. Click any slot to
@@ -173,8 +175,8 @@ class App extends Component {
         <p>
           I started this on a plane after some frustration with a puzzle. I
           figured it would be a simple way to toy around with react. If you are
-          interested, you can find the source code
-          on <a href="https://github.com/veswill3/sudoku-helper">github</a>.
+          interested, you can find the source code on{' '}
+          <a href="https://github.com/veswill3/sudoku-helper">github</a>.
         </p>
       </div>
     );
