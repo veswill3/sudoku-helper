@@ -53,9 +53,9 @@ class App extends Component {
     this.setState({board: newBoard});
   }
 
-  renderCell(heightlightObj, r, c) {
+  renderCell(highlightObj, r, c) {
     let classes = [];
-    if (heightlightObj && heightlightObj[r + ':' + c]) {
+    if (highlightObj && highlightObj[r + ':' + c]) {
       classes.push("highlight");
     }
     if (this.state.selected === this.state.board[r][c]) {
@@ -69,18 +69,18 @@ class App extends Component {
     );
   }
 
-  renderRow(heightlightObj, r) {
+  renderRow(highlightObj, r) {
     return (
       <tr>
-        {this.renderCell(heightlightObj, r, 0)}
-        {this.renderCell(heightlightObj, r, 1)}
-        {this.renderCell(heightlightObj, r, 2)}
-        {this.renderCell(heightlightObj, r, 3)}
-        {this.renderCell(heightlightObj, r, 4)}
-        {this.renderCell(heightlightObj, r, 5)}
-        {this.renderCell(heightlightObj, r, 6)}
-        {this.renderCell(heightlightObj, r, 7)}
-        {this.renderCell(heightlightObj, r, 8)}
+        {this.renderCell(highlightObj, r, 0)}
+        {this.renderCell(highlightObj, r, 1)}
+        {this.renderCell(highlightObj, r, 2)}
+        {this.renderCell(highlightObj, r, 3)}
+        {this.renderCell(highlightObj, r, 4)}
+        {this.renderCell(highlightObj, r, 5)}
+        {this.renderCell(highlightObj, r, 6)}
+        {this.renderCell(highlightObj, r, 7)}
+        {this.renderCell(highlightObj, r, 8)}
       </tr>
     );
   }
@@ -166,8 +166,8 @@ class App extends Component {
           <button onClick={() => this.updateHighlight(++this.state.selected)}>+</button>
         </div>
         <p>
-          Click a number below to show it's availible slots. Click any slot to
-          insert that number. Cylce through numbers with the [+] button,
+          Click a number below to show it's available slots. Click any slot to
+          insert that number. Cycle through numbers with the [+] button,
           spacebar, or left/right arrows.
         </p>
         <p>
